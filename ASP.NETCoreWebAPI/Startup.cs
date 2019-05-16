@@ -1,9 +1,13 @@
-﻿using ASP.NETCoreWebAPI.Extensions;
+﻿using System;
+using ASP.NETCoreWebAPI.Data;
+using ASP.NETCoreWebAPI.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace ASP.NETCoreWebAPI
 {
@@ -24,6 +28,13 @@ namespace ASP.NETCoreWebAPI
 
       // Register the Swagger generator, defining one or more Swagger documents
       services.ConfigureSwaggerGen();
+
+      services.AddDbContextPool<AppDbContext>(
+          options => options.UseMySql("Server=localhost;Database=CoreWebApi;user=root;password=felina;", mySqlOptions =>
+        {
+          mySqlOptions.ServerVersion(new Version(5, 7, 17), ServerType.MySql);
+        }
+      ));
 
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
     }
