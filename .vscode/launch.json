@@ -15,7 +15,19 @@
             "cwd": "${workspaceFolder}/ASP.NETCoreWebAPI",
             "stopAtEntry": false,
             "launchBrowser": {
-                "enabled": true
+                "enabled": true,
+                "args": "${auto-detect-url}",
+                "windows": {
+                    "command": "cmd.exe",
+                    "args": "/C start ${auto-detect-url}/swagger"
+                },
+                "osx": {
+                    "command": "open"
+                },
+                "linux": {
+                    "command": "xdg-open",
+                    "args": "${auto-detect-url}/swagger"
+                }
             },
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
