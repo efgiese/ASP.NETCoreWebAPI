@@ -2,11 +2,10 @@ using System.Collections.Generic;
 
 namespace ASP.NETCoreWebAPI.Model
 {
-  public class Author
+  public class Tag
   {
     public int Id { get; set; }
     public string Name { get; set; }
-
-    public ICollection<Course> Courses { get; set; }
+    public ICollection<CourseTag> CourseTags { get; set; }
   }
 }
