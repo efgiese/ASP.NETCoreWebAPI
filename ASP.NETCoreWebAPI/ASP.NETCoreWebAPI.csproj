@@ -35,6 +35,10 @@
     <AdditionalFiles Include="CodeMetricsConfig.txt" />
   </ItemGroup>
 
+  <ItemGroup>
+		<Content Update="nlog.config" CopyToOutputDirectory="PreserveNewest" />
+	</ItemGroup>
+
   <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">
     <ItemGroup>
       <DocFile Include="bin\$(Configuration)\$(TargetFramework)\*.xml" />
