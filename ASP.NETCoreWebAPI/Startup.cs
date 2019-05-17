@@ -29,12 +29,7 @@ namespace ASP.NETCoreWebAPI
       // Register the Swagger generator, defining one or more Swagger documents
       services.ConfigureSwaggerGen();
 
-      services.AddDbContextPool<AppDbContext>(
-          options => options.UseMySql("Server=localhost;Database=CoreWebApi;user=root;password=felina;", mySqlOptions =>
-        {
-          mySqlOptions.ServerVersion(new Version(5, 7, 17), ServerType.MySql);
-        }
-      ));
+      services.ConfigureMySqlContext();
 
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
     }

@@ -1,6 +1,9 @@
 using System;
 using System.IO;
+using ASP.NETCoreWebAPI.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace ASP.NETCoreWebAPI.Extensions
@@ -40,6 +43,16 @@ namespace ASP.NETCoreWebAPI.Extensions
         var xmlPath = Path.Combine(basePath, "ASP.NETCoreWebAPI.xml");
         swag.IncludeXmlComments(xmlPath);
       });
+    }
+
+    public static void ConfigureMySqlContext(this IServiceCollection services)
+    {
+      services.AddDbContextPool<AppDbContext>(
+        options => options.UseMySql("Server=localhost;Database=CoreWebApi;user=root;password=felina;", mySqlOptions =>
+          {
+            mySqlOptions.ServerVersion(new Version(8, 0, 16), ServerType.MySql);
+          }
+        ));
     }
 
   }
